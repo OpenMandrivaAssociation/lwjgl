@@ -1,13 +1,13 @@
-Summary: The Lightweight Java Game Library
-Name: lwjgl
-Version: 2.5
-Release: %mkrel 1
-Source0: http://downloads.sourceforge.net/project/java-game-lib/Official%20Releases/LWJGL%20%{version}/%{name}-source-%{version}.zip
-Source1: http://developer.apple.com/mac/library/samplecode/AppleJavaExtensions/AppleJavaExtensions.zip
-License: BSD
-Group: Development/Java
-Url: http://lwjgl.org
-BuildRoot: %{_tmppath}/%{name}-%{version}-%{release}-buildroot
+Summary:	The Lightweight Java Game Library
+Name:		lwjgl
+Version:	2.5
+Release:	%mkrel 1
+Source0:	http://downloads.sourceforge.net/project/java-game-lib/Official%20Releases/LWJGL%20%{version}/%{name}-source-%{version}.zip
+Source1:	http://developer.apple.com/mac/library/samplecode/AppleJavaExtensions/AppleJavaExtensions.zip
+License:	BSD
+Group:		Development/Java
+Url:		http://lwjgl.org
+BuildRoot:	%{_tmppath}/%{name}-%{version}-%{release}-buildroot
 BuildRequires:	ant
 BuildRequires:	ant-nodeps
 BuildRequires:	ant-pack200
@@ -35,13 +35,11 @@ wheel and Joysticks. All in a simple and straight forward API.
 Summary:	Javadoc for lwjgl
 Group:		Development/Java
 
-%description javadoc
+%description	javadoc
 Javadoc for lwjgl.
 
 %prep
-cd $RPM_BUILD_DIR
-mkdir %{name}-%{version}
-%setup -q -D -T -b1 -a0
+%setup -q -c -T -b1 -a0
 %remove_java_binaries
 %__mkdir libs bin
 pushd libs
@@ -64,29 +62,25 @@ export CLASSPATH="."
 
 %install
 rm -rf $RPM_BUILD_ROOT
-%__install -dm 755 $RPM_BUILD_ROOT%_javadir
-%__install -m 644 libs/%{name}.jar $RPM_BUILD_ROOT%_javadir/%{name}-%{version}.jar
-%__install -m 644 libs/%{name}_util.jar $RPM_BUILD_ROOT%_javadir/%{name}-util-%{version}.jar
-%__install -m 644 libs/%{name}_util_applet.jar $RPM_BUILD_ROOT%_javadir/%{name}-util-applet-%{version}.jar
+install -m644 libs/%{name}.jar -D $RPM_BUILD_ROOT%{_javadir}/%{name}-%{version}.jar
+install -m44 libs/%{name}_util.jar -D $RPM_BUILD_ROOT%{_javadir}/%{name}-util-%{version}.jar
+install -m644 libs/%{name}_util_applet.jar -D $RPM_BUILD_ROOT%{_javadir}/%{name}-util-applet-%{version}.jar
 %create_jar_links
-%__install -dm 755 $RPM_BUILD_ROOT%_libdir
-%__install -m 644 libs/linux/lib%{name}.so $RPM_BUILD_ROOT%_libdir/lib%{name}.so
+install -m644 libs/linux/lib%{name}.so -D $RPM_BUILD_ROOT%{_libdir}/lib%{name}.so
 
 # javadoc
-%__install -dm 755 $RPM_BUILD_ROOT%_javadocdir/%{name}-%{version}
-pushd doc/javadoc
-cp -pr * $RPM_BUILD_ROOT%_javadocdir/%{name}-%{version}
-popd
-ln -s %{name}-%{version} $RPM_BUILD_ROOT%_javadocdir/%{name}
+install -d $RPM_BUILD_ROOT%{_javadocdir}/%{name}-%{version}
+cp -pr doc/javadoc/* $RPM_BUILD_ROOT%{_javadocdir}/%{name}-%{version}
+ln -s %{name}-%{version} $RPM_BUILD_ROOT%{_javadocdir}/%{name}
 
 %clean
 rm -rf $RPM_BUILD_ROOT
 
 %files
 %defattr(-,root,root,-)
-%_javadir/*.jar
-%_libdir/*.so
+%{_javadir}/*.jar
+%{_libdir}/*.so
 
 %files javadoc
 %defattr(-,root,root,-)
-%_javadocdir/*
+%{_javadocdir}/*
