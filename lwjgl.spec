@@ -14,6 +14,7 @@ BuildRequires:	ant-pack200
 BuildRequires:	java-rpmbuild
 BuildRequires:	jinput
 BuildRequires:	unzip
+BuildRequires:	jlzma
 BuildRequires:	libxxf86vm-static-devel
 BuildRequires:	libxrandr2-devel
 BuildRequires:	libxcursor-devel
@@ -39,13 +40,13 @@ Group:		Development/Java
 Javadoc for lwjgl.
 
 %prep
-%setup -q -c -T -b1 -a0
+%setup -c
 %remove_java_binaries
 %__mkdir libs bin
 pushd libs
 ln -s %_javadir/jinput.jar .
 # Deps needed for build only, macOS compat.
-mv ../../AppleJavaExtensions/AppleJavaExtensions.jar .
+unzip -j $RPM_SOURCE_DIR/AppleJavaExtensions.zip AppleJavaExtensions/AppleJavaExtensions.jar
 popd
 pushd platform_build
 ln -s %_javadir/jlzma JLzma.jar
@@ -63,7 +64,7 @@ export CLASSPATH="."
 %install
 rm -rf $RPM_BUILD_ROOT
 install -m644 libs/%{name}.jar -D $RPM_BUILD_ROOT%{_javadir}/%{name}-%{version}.jar
-install -m44 libs/%{name}_util.jar -D $RPM_BUILD_ROOT%{_javadir}/%{name}-util-%{version}.jar
+install -m644 libs/%{name}_util.jar -D $RPM_BUILD_ROOT%{_javadir}/%{name}-util-%{version}.jar
 install -m644 libs/%{name}_util_applet.jar -D $RPM_BUILD_ROOT%{_javadir}/%{name}-util-applet-%{version}.jar
 %create_jar_links
 install -m644 libs/linux/lib%{name}.so -D $RPM_BUILD_ROOT%{_libdir}/lib%{name}.so
