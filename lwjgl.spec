@@ -16,10 +16,10 @@ BuildRequires:	jinput
 BuildRequires:	unzip
 BuildRequires:	jlzma
 BuildRequires:	libxxf86vm-static-devel
-BuildRequires:	libxrandr2-devel
+BuildRequires:	libxrandr-devel
 BuildRequires:	libxcursor-devel
 BuildRequires:	x11-proto-devel
-BuildRequires:	libx11_6-devel
+BuildRequires:	X11-devel
 
 Requires:	java >= 1.5
 
