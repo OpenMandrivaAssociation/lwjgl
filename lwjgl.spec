@@ -67,7 +67,7 @@ install -m644 libs/%{name}.jar -D $RPM_BUILD_ROOT%{_javadir}/%{name}-%{version}.
 install -m644 libs/%{name}_util.jar -D $RPM_BUILD_ROOT%{_javadir}/%{name}-util-%{version}.jar
 install -m644 libs/%{name}_util_applet.jar -D $RPM_BUILD_ROOT%{_javadir}/%{name}-util-applet-%{version}.jar
 %create_jar_links
-install -m644 libs/linux/lib%{name}.so -D $RPM_BUILD_ROOT%{_libdir}/lib%{name}.so
+install -m644 libs/linux/lib%{name}*.so -D $RPM_BUILD_ROOT%{_libdir}/lib%{name}.so
 
 # javadoc
 install -d $RPM_BUILD_ROOT%{_javadocdir}/%{name}-%{version}
