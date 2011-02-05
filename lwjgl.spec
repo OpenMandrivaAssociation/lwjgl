@@ -1,9 +1,10 @@
 Summary:	The Lightweight Java Game Library
 Name:		lwjgl
 Version:	2.5
-Release:	%mkrel 1
+Release:	%mkrel 2
 Source0:	http://downloads.sourceforge.net/project/java-game-lib/Official%20Releases/LWJGL%20%{version}/%{name}-source-%{version}.zip
 Source1:	http://developer.apple.com/mac/library/samplecode/AppleJavaExtensions/AppleJavaExtensions.zip
+Patch0:		lwjgl-source-2.5-link.patch
 License:	BSD
 Group:		Development/Java
 Url:		http://lwjgl.org
@@ -15,11 +16,11 @@ BuildRequires:	java-rpmbuild
 BuildRequires:	jinput
 BuildRequires:	unzip
 BuildRequires:	jlzma
-BuildRequires:	libxxf86vm-static-devel
+BuildRequires:	libxxf86vm-devel
 BuildRequires:	libxrandr-devel
 BuildRequires:	libxcursor-devel
-BuildRequires:	x11-proto-devel
-BuildRequires:	X11-devel
+BuildRequires:	libx11-devel
+Buildrequires:	libxt-devel
 
 Requires:	java >= 1.5
 
@@ -52,9 +53,7 @@ pushd platform_build
 ln -s %_javadir/jlzma JLzma.jar
 ln -s %_javadir/ant/Pack200Task.jar .
 popd
-# adjust linking option for Xxf86vm
-%__sed -i -e 's|-Wl,-static,-lXxf86vm,-call_shared|-lXxf86vm|g' platform_build/linux_ant/build.xml
-# fix jar build
+%patch0 -p0
 %__sed -i -e 's|<jar|<jar index="true" compress="true"|g' build.xml
 
 %build
