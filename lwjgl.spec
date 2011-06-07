@@ -1,7 +1,7 @@
 Summary:	The Lightweight Java Game Library
 Name:		lwjgl
-Version:	2.5
-Release:	%mkrel 2
+Version:	2.7.1
+Release:	%mkrel 1
 Source0:	http://downloads.sourceforge.net/project/java-game-lib/Official%20Releases/LWJGL%20%{version}/%{name}-source-%{version}.zip
 Source1:	http://developer.apple.com/mac/library/samplecode/AppleJavaExtensions/AppleJavaExtensions.zip
 Patch0:		lwjgl-source-2.5-link.patch
