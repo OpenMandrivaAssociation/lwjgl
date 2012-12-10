@@ -8,7 +8,6 @@ Patch0:		lwjgl-source-2.5-link.patch
 License:	BSD
 Group:		Development/Java
 Url:		http://lwjgl.org
-BuildRoot:	%{_tmppath}/%{name}-%{version}-%{release}-buildroot
 BuildRequires:	ant
 BuildRequires:	ant-nodeps
 BuildRequires:	ant-pack200
@@ -47,7 +46,7 @@ Javadoc for lwjgl.
 pushd libs
 ln -s %_javadir/jinput.jar .
 # Deps needed for build only, macOS compat.
-unzip -j $RPM_SOURCE_DIR/AppleJavaExtensions.zip AppleJavaExtensions/AppleJavaExtensions.jar
+unzip -j %{SOURCE1} AppleJavaExtensions/AppleJavaExtensions.jar
 popd
 pushd platform_build
 ln -s %_javadir/jlzma JLzma.jar
@@ -61,7 +60,6 @@ export CLASSPATH="."
 %ant all javadoc
 
 %install
-rm -rf $RPM_BUILD_ROOT
 install -m644 libs/%{name}.jar -D $RPM_BUILD_ROOT%{_javadir}/%{name}-%{version}.jar
 install -m644 libs/%{name}_util.jar -D $RPM_BUILD_ROOT%{_javadir}/%{name}-util-%{version}.jar
 install -m644 libs/%{name}_util_applet.jar -D $RPM_BUILD_ROOT%{_javadir}/%{name}-util-applet-%{version}.jar
@@ -73,14 +71,30 @@ install -d $RPM_BUILD_ROOT%{_javadocdir}/%{name}-%{version}
 cp -pr doc/javadoc/* $RPM_BUILD_ROOT%{_javadocdir}/%{name}-%{version}
 ln -s %{name}-%{version} $RPM_BUILD_ROOT%{_javadocdir}/%{name}
 
-%clean
-rm -rf $RPM_BUILD_ROOT
-
 %files
-%defattr(-,root,root,-)
 %{_javadir}/*.jar
 %{_libdir}/*.so
 
 %files javadoc
-%defattr(-,root,root,-)
 %{_javadocdir}/*
+
+
+%changelog
+* Tue Jun 07 2011 Zombie Ryushu <ryushu@mandriva.org> 2.7.1-1mdv2011.0
++ Revision: 683006
+- Upgrade to 2.7.1
+
+* Sat Feb 05 2011 Funda Wang <fwang@mandriva.org> 2.5-2
++ Revision: 636071
+- tighten BR
+
+* Wed Oct 13 2010 Per Øyvind Karlsen <peroyvind@mandriva.org> 2.5-1mdv2011.0
++ Revision: 585261
+- fix install on 64 bit
+- fix buildrequires
+- apply some cosmetics
+
+  + Jonathan Bayle <mrhide@mandriva.org>
+    - fix %%setup
+    - import lwjgl
+
