@@ -15,10 +15,10 @@ BuildRequires:	java-rpmbuild
 BuildRequires:	jinput
 BuildRequires:	unzip
 BuildRequires:	jlzma
-BuildRequires:	libxxf86vm-devel
-BuildRequires:	libxrandr-devel
-BuildRequires:	libxcursor-devel
-BuildRequires:	libx11-devel
+BuildRequires:	pkgconfig(xxf86vm)
+BuildRequires:	pkgconfig(xrandr)
+BuildRequires:	pkgconfig(xcursor)
+BuildRequires:	pkgconfig(x11)
 Buildrequires:	libxt-devel
 
 Requires:	java >= 1.5
