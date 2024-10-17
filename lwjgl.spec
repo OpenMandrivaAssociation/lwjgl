@@ -7,7 +7,7 @@ Source1:	http://developer.apple.com/mac/library/samplecode/AppleJavaExtensions/A
 Patch0:		lwjgl-source-2.5-link.patch
 License:	BSD
 Group:		Development/Java
-Url:		http://lwjgl.org
+Url:		https://lwjgl.org
 BuildRequires:	ant
 BuildRequires:	ant-nodeps
 BuildRequires:	ant-pack200
